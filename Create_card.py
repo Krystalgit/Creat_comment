@@ -6,7 +6,8 @@ import streamlit as st
 import pandas as pd
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import os
-# os.system("pip install " + 'BeautifulSoup4')
+import bs4
+print(help(bs4))
 import re
 from bs4 import BeautifulSoup as bs
 from io import BytesIO
