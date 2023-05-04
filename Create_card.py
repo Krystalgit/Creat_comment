@@ -297,9 +297,9 @@ class Creat_Card:
             draw2.text((100, 22), u'%s' % barname, '#FFFFFF', font_img2, align='left')
 
         if PostCount is None:
-            draw2.text((500, 22), u'正在热议中...', '#FFFFFF', font_img2, align='left')
+            draw2.text((530, 22), u'正在热聊中...', '#FFFFFF', font_img2, align='left')
         else:
-            draw2.text((465, 22), u'%s帖子热议中' % PostCount, '#FFFFFF', font_img2, align='left')
+            draw2.text((465, 22), u'%s帖子热聊中' % PostCount, '#FFFFFF', font_img2, align='left')
         images.append(image2)
 
         # 拼接长图
