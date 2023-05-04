@@ -149,7 +149,7 @@ class Creat_Card:
             'X-Forwarded-For': '180.169.1.1'
         }
         res = self.session.get(url=url, params=params, headers=headers)
-        # print(res.text)
+        print(res.url)
         data = res.json()
         df = self.get_user_basic_info(data)
         df['bar_fundcode'] = df['stockbar_code'].map(lambda x: self.get_bar_fundcode(x))
@@ -175,6 +175,7 @@ class Creat_Card:
             'X-Forwarded-For': '180.169.1.1'
         }
         res = self.session.get(url=url, params=params, headers=headers)
+        print(res.url)
         FansCount = res.json()['Data']['FansCount']
         PostCount = res.json()['Data']['PostCount']
         print(FansCount, PostCount)
@@ -182,7 +183,8 @@ class Creat_Card:
 
     def draw_card(self, postid, istop=False):
         d = self.get_article_data(postid)
-        FansCount, PostCount = self.get_barinfo(d['bar_fundcode'])
+        PostCount = None
+        # FansCount, PostCount = self.get_barinfo(d['bar_fundcode'])
         print(d)
         post_title = d['post_title'].replace(' ', '')
         post_content = d['post_content'].replace(' ', '')
@@ -288,7 +290,10 @@ class Creat_Card:
         if len(barname) > 10:
             barname = barname[0:9] + str('...')
         draw2.text((100, 22), u'%s' % barname, '#FFFFFF', font_img2, align='left')
-        draw2.text((465, 22), u'%s帖子热议中' % PostCount, '#FFFFFF', font_img2, align='left')
+        if PostCount is None:
+            draw2.text((480, 22), u'正在热议中...', '#FFFFFF', font_img2, align='left')
+        else:
+            draw2.text((465, 22), u'%s帖子热议中' % PostCount, '#FFFFFF', font_img2, align='left')
         images.append(image2)
 
         # 拼接长图
@@ -327,6 +332,6 @@ class Creat_Card:
 if __name__ == '__main__':
     c = Creat_Card()
     # df = c.get_article_data('1304110194')
-    # d = c.draw_card('1304816142', istop=True)
+    d = c.draw_card('1304816142', istop=True)
     # c.get_barinfo('010806')
-    c.streamlit()
+    # c.streamlit()
