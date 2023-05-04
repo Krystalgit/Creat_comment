@@ -221,8 +221,8 @@ class Creat_Card:
             add_all = True
 
         post_content = '\n'.join(rows[0:3])
-        rows = post_content.split('\n')
-        rows = [i for i in rows if i != '']
+        rows_all = post_content.split('\n')
+        rows = [i for i in rows_all if i != '']
 
         # print(d)
         images = []
@@ -273,10 +273,10 @@ class Creat_Card:
         if add_all is True:
             image_all = Image.open(self.current_path + '/image/all.png')
             if post_title == '':
-                if len(rows) == 3:
+                if len(rows_all) >= 3:
                     image1.paste(image_all, (864, 338))
             else:
-                if len(rows) == 3:
+                if len(rows_all) >= 3:
                     image1.paste(image_all, (864, 358))
 
         if istop is True:
