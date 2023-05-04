@@ -332,6 +332,6 @@ class Creat_Card:
 if __name__ == '__main__':
     c = Creat_Card()
     # df = c.get_article_data('1304110194')
-    d = c.draw_card('1304816142', istop=True)
+    # d = c.draw_card('1304816142', istop=True)
     # c.get_barinfo('010806')
-    # c.streamlit()
+    c.streamlit()
