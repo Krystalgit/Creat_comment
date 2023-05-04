@@ -1,13 +1,12 @@
 import random
 import string
-
+from datetime import datetime
 import requests
 import streamlit as st
 import pandas as pd
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 import os
 import bs4
-print(help(bs4))
 import re
 from bs4 import BeautifulSoup as bs
 from io import BytesIO
@@ -296,7 +295,7 @@ class Creat_Card:
         for i in images:
             to_image.paste(i, (0, height))
             height += i.size[1]
-        to_image.save(self.current_path + '/comment_card1.png', 'png')
+        to_image.save(self.current_path + '/comment_card.png', 'png')
         return to_image
 
     def streamlit(self):
@@ -311,11 +310,11 @@ class Creat_Card:
             else:
                 img = self.draw_card(postid, istop=False)
             st.image(img)
-            with open(self.current_path + '/temp.png', 'rb') as file:
+            with open(self.current_path + '/comment_card.png', 'rb') as file:
                 st.download_button(
                     label='下载图片',
                     data=file,
-                    file_name=self.selectfund + '_' + self.optiondate + '.png',
+                    file_name='%s_%s.png' % (datetime.now().strftime('%Y-%m-%d'), postid),
                     mime='image/png'
                 )
 
