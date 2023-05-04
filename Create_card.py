@@ -10,6 +10,7 @@ import re
 from bs4 import BeautifulSoup as bs
 from io import BytesIO
 
+os.system("pip install " + 'BeautifulSoup4')
 
 class Creat_Card:
     def __init__(self):
@@ -308,7 +309,7 @@ class Creat_Card:
             else:
                 img = self.draw_card(postid, istop=False)
             st.image(img)
-            with open(self.current_path + 'temp.png', 'rb') as file:
+            with open(self.current_path + '/temp.png', 'rb') as file:
                 st.download_button(
                     label='下载图片',
                     data=file,
