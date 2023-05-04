@@ -325,7 +325,7 @@ class Creat_Card:
         st.header('定投达人卡片素材生成')
         colwd1, colwd2 = st.columns(2)
         with colwd1:
-            postid = st.text_input('输入帖子postid', '1304816142')
+            postid = st.text_input('输入帖子postid', '1305267858')
             is_valuable = st.selectbox('是否是第一张卡片', ['否', '是'])
             select_fund = st.text_input('指定基金吧（写入吧名，默认为空）', '')
             special_word = st.text_input('修改正在热聊中（默认为空）', '')
