@@ -181,7 +181,7 @@ class Creat_Card:
         print(FansCount, PostCount)
         return FansCount, PostCount
 
-    def draw_card(self, postid, istop=False):
+    def draw_card(self, postid, istop=False, select_fund='', special_word=''):
         d = self.get_article_data(postid)
         PostCount = None
         # FansCount, PostCount = self.get_barinfo(d['bar_fundcode'])
@@ -286,7 +286,10 @@ class Creat_Card:
         image2 = Image.open(self.current_path + '/image/comment_card_part2.png')
         draw2 = ImageDraw.Draw(image2)
         # print(PostCount)
-        barname = d['stockbar_name']
+        if select_fund == '':
+            barname = d['stockbar_name']
+        else:
+            barname = select_fund
         if PostCount is None:
             if len(barname) > 11:
                 barname = barname[0:10] + str('...')
@@ -297,7 +300,10 @@ class Creat_Card:
             draw2.text((100, 22), u'%s' % barname, '#FFFFFF', font_img2, align='left')
 
         if PostCount is None:
-            draw2.text((530, 22), u'正在热聊中...', '#FFFFFF', font_img2, align='left')
+            if special_word == '':
+                draw2.text((530, 22), u'正在热聊中...', '#FFFFFF', font_img2, align='left')
+            else:
+                draw2.text((530, 22), u'%s' % special_word, '#FFFFFF', font_img2, align='left')
         else:
             draw2.text((465, 22), u'%s帖子热聊中' % PostCount, '#FFFFFF', font_img2, align='left')
         images.append(image2)
@@ -321,11 +327,13 @@ class Creat_Card:
         with colwd1:
             postid = st.text_input('输入帖子postid', '1304816142')
             is_valuable = st.selectbox('是否是第一张卡片', ['否', '是'])
+            select_fund = st.text_input('指定基金吧（写入吧名，默认为空）', '')
+            special_word = st.text_input('修改正在热聊中（默认为空）', '')
         with colwd2:
             if is_valuable == '是':
-                img = self.draw_card(postid, istop=True)
+                img = self.draw_card(postid, istop=True, select_fund=select_fund, special_word=special_word)
             else:
-                img = self.draw_card(postid, istop=False)
+                img = self.draw_card(postid, istop=False, select_fund=select_fund, special_word=special_word)
             st.image(img)
             with open(self.current_path + '/comment_card.png', 'rb') as file:
                 st.download_button(
