@@ -338,7 +338,7 @@ class Creat_Card:
             else:
                 img = self.draw_card(postid, istop=False, select_fund=select_fund, special_word=special_word)
             st.image(img)
-            st.markdown('相关吧的基金代码：%s' % self.bar_code)
+            st.markdown('默认相关吧的基金代码：%s' % self.bar_code)
             with open(self.current_path + '/comment_card.png', 'rb') as file:
                 st.download_button(
                     label='下载图片',
