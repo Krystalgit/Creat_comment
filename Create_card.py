@@ -145,7 +145,8 @@ class Creat_Card:
         }
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
-                          'Chrome/110.0.0.0 Safari/537.36 Edg/110.0.1587.56 '
+                          'Chrome/110.0.0.0 Safari/537.36 Edg/110.0.1587.56 ',
+            'X-Forwarded-For': '180.169.1.1'
         }
         res = self.session.get(url=url, params=params, headers=headers)
         # print(res.text)
@@ -168,7 +169,12 @@ class Creat_Card:
             random.sample(string.digits * 10 + string.ascii_letters * 10 + string.punctuation * 1, 331)),
         params = dict(fundCode=fundCode, product='EFund', plat='Android', version='6.6.4', passportid=passportid,
                       deviceid=deviceid, ctoken=ctoken, utoken=utoken)
-        res = self.session.get(url=url, params=params)
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
+                          'Chrome/110.0.0.0 Safari/537.36 Edg/110.0.1587.56 ',
+            'X-Forwarded-For': '180.169.1.1'
+        }
+        res = self.session.get(url=url, params=params, headers=headers)
         FansCount = res.json()['Data']['FansCount']
         PostCount = res.json()['Data']['PostCount']
         print(FansCount, PostCount)
@@ -282,7 +288,7 @@ class Creat_Card:
         if len(barname) > 10:
             barname = barname[0:9] + str('...')
         draw2.text((100, 22), u'%s' % barname, '#FFFFFF', font_img2, align='left')
-        draw2.text((500, 22), u'%s帖子热议中' % PostCount, '#FFFFFF', font_img2, align='left')
+        draw2.text((465, 22), u'%s帖子热议中' % PostCount, '#FFFFFF', font_img2, align='left')
         images.append(image2)
 
         # 拼接长图
