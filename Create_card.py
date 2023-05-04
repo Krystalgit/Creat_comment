@@ -273,10 +273,10 @@ class Creat_Card:
         if add_all is True:
             image_all = Image.open(self.current_path + '/image/all.png')
             if post_title == '':
-                if len(rows_all) >= 3:
+                if len(rows_all) > 3:
                     image1.paste(image_all, (864, 338))
             else:
-                if len(rows_all) >= 3:
+                if len(rows_all) > 3:
                     image1.paste(image_all, (864, 358))
 
         if istop is True:
