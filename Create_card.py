@@ -17,6 +17,7 @@ class Creat_Card:
     def __init__(self):
         self.current_path = os.path.dirname(__file__)
         self.session = requests.session()
+        self.bar_code = ''
 
     def crop_max_square(self, pil_img):
         return self.crop_center(pil_img, min(pil_img.size), min(pil_img.size))
@@ -183,6 +184,8 @@ class Creat_Card:
 
     def draw_card(self, postid, istop=False, select_fund='', special_word=''):
         d = self.get_article_data(postid)
+        self.bar_code = str(d['bar_fundcode'])
+        print(d)
         PostCount = None
         # FansCount, PostCount = self.get_barinfo(d['bar_fundcode'])
         print(d)
@@ -335,6 +338,7 @@ class Creat_Card:
             else:
                 img = self.draw_card(postid, istop=False, select_fund=select_fund, special_word=special_word)
             st.image(img)
+            st.markdown('相关吧的基金代码：%s' % self.bar_code)
             with open(self.current_path + '/comment_card.png', 'rb') as file:
                 st.download_button(
                     label='下载图片',
