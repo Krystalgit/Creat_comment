@@ -231,7 +231,7 @@ class Creat_Card:
         images = []
         if istop is True:
             image0 = Image.open(self.current_path + '/image/img_top.png')
-            images.append(image0)
+            # images.append(image0)
         pic_path = self.current_path + '/image/white_bg.png'
         image1 = Image.open(pic_path)
         print(len(rows), rows)
@@ -286,7 +286,7 @@ class Creat_Card:
             image_cover = Image.open(self.current_path + '/image/img_cover.png')
             image1.paste(image_cover, (0, 0), image_cover)
 
-        image2 = Image.open(self.current_path + '/image/comment_card_part2.png')
+        image2 = Image.open(self.current_path + '/image/comment_card_part2_old.png')
         draw2 = ImageDraw.Draw(image2)
         # print(PostCount)
         if select_fund == '':
