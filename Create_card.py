@@ -286,7 +286,7 @@ class Creat_Card:
             image_cover = Image.open(self.current_path + '/image/img_cover.png')
             image1.paste(image_cover, (0, 0), image_cover)
 
-        image2 = Image.open(self.current_path + '/image/comment_card_part2_old.png')
+        image2 = Image.open(self.current_path + '/image/comment_card_part2.png')
         draw2 = ImageDraw.Draw(image2)
         # print(PostCount)
         if select_fund == '':
