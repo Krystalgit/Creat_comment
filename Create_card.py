@@ -10,6 +10,8 @@ import bs4
 import re
 from bs4 import BeautifulSoup as bs
 from io import BytesIO
+from requests.adapters import HTTPAdapter
+from urllib3.util import Retry
 
 
 
@@ -17,7 +19,17 @@ class Creat_Card:
     def __init__(self):
         self.current_path = os.path.dirname(__file__)
         self.session = requests.session()
-        self.bar_code = ''
+        self.session.mount('http://',
+                           HTTPAdapter(max_retries=Retry(total=10, allowed_methods=frozenset(['GET', 'POST']),
+                                                         status_forcelist=[500, 502, 503, 504])))
+        self.session.mount('https://',
+                           HTTPAdapter(max_retries=Retry(total=10, allowed_methods=frozenset(['GET', 'POST']),
+                                                         status_forcelist=[500, 502, 503, 504])))
+        self.headers = {
+            'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, '
+                          'like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36',
+        }
+        self.current_path = os.path.dirname(__file__)
 
     def crop_max_square(self, pil_img):
         return self.crop_center(pil_img, min(pil_img.size), min(pil_img.size))
